@@ -1,61 +1,12 @@
-<!DOCTYPE html>
-<html lang="fr">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="author" content="Coding city">
-    <title>Pratiquer le HTML5 & le CSS3 | Accueil</title>
-    
-    <link rel="icon" href="assets/imgs/cc.ico">
-    
-    <!-- Lien de notre fichier CSS -->
-    <link rel="stylesheet" href="assets/stylesheets/screen.css">
-    
-    <!-- Font awesome link (Lien externe pour les icones) -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.14.0/css/all.min.css" integrity="sha512-1PKOgIY59xJ8Co8+NE6FZ+LOAZKjy+KY8iq0G4B3CyeY6wYHN3yt9PW0XpSriVlkMXe40PTKnXrLnZ9+fkDaog==" crossorigin="anonymous" />
-
-</head>
-<body>
-<!-- header section -->
-<header class="header light-header" id="header">
-    <div class="container">
-        <div class="header-container">
-            <!-- Logo -->
-            <a href="#" class="logo"><img src="assets/imgs/cc.png" alt="Le logo" class="img"></a>
-            <!--End logo -->
-            <nav class="navigation"><!-- Navigation begin -->
-                <ul class="nav-links">
-                    <li class="nav-item"><a href="index.html" class="nav-link">Accueil
-                        <i class="fas fa-home"></i></a></li>
-                    
-                    <li class="nav-item submenu"><!-- Submenu link -->
-                        <a href="#" class="nav-link active">Blog <i class="fas fa-comments"></i></a>
-                        
-                        <ul class="dropdown-menu"><!-- Dropdown menu -->
-                            <li class="nav-item"><a href="blog.html" class="nav-link">Blog <i
-                                    class="fas fa-comment"></i></a></li>
-                            <li class="nav-item"><a href="single.html" class="nav-link active">Single Blog <i class="fas fa-newspaper"></i></a></li>
-                        </ul><!-- End dropdown menu -->
-                    </li><!-- End submenu link -->
-                    
-                    <li class="nav-item"><a href="#" class="nav-link">Contact <i class="fas fa-envelope"></i></a></li>
-                </ul>
-            </nav><!-- End Navigation -->
-            <a href="#" class="hamburger" id="hamburger"><i class="fas fa-bars"></i></a><!-- responsive menu icon
-                 -->
-        </div>
-    </div>
-</header><!-- End header section -->
-
 <!-- Banner section -->
 <section class="banner single-banner" id="banner">
     <div class="container">
         <div class="banner-wrapper">
             <h1 class="b-title">Lorem ipsum dolor sit amet.</h1>
-            <div class="page-link">
-                <a href="index.html">Accueil<i class="fas fa-caret-right"></i></a>
+            <div class="page-path">
+                <a href="index.php">Accueil<i class="fas fa-caret-right"></i></a>
                 <a href="blog.html">Blog<i class="fas fa-caret-right"></i></a>
-                <a href="single.html">Article du blog</a>
+                <a href="single.php">Article du blog</a>
             </div>
         </div>
     </div>
@@ -81,11 +32,11 @@
                             <li class="comments"><a href="#">5069 Commentaires<i class="fas fa-comment"></i></a></li>
                         </ul>
                     </div>
-    
+
                     <div class="post-img px-15 mb-1">
                         <img src="assets/imgs/blog/main-blog/mainBlog-2.jpg" alt="" class="img">
                     </div>
-    
+
                     <div class="blog-details px-15 mb-1">
                         <h2 class="post-title">Lorem ipsum dolor sit amet.</h2>
                         <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Corporis culpa eos in minus modi nulla quae quis repudiandae velit? Accusamus cumque iure modi nam odit perferendis quae quibusdam tenetur unde!</p>
@@ -93,7 +44,7 @@
                         <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Corporis culpa eos in minus modi nulla quae quis repudiandae velit? Accusamus cumque iure modi nam odit perferendis quae quibusdam tenetur unde!</p>
                         <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Assumenda, eum sequi. Consectetur culpa, cum cupiditate ea eius est facilis id incidunt iste minus nulla odit qui quisquam repellat totam unde.</p>
                     </div>
-    
+
                     <div class="notice px-15 my-1">
                         <div class="quote">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Alias consectetur dignissimos ducimus, eaque eos, illo inventore maiores necessitatibus nesciunt odit quis unde ut vero voluptatem voluptates. Assumenda deserunt eius inventore?</div>
                         <div class="notice-details row">
@@ -106,7 +57,7 @@
                         </div>
                     </div>
                 </div><!-- End single post details -->
-                
+
                 <div class="navigation-area px-15 row"><!-- Navigation begin -->
                     <div class="nav-left px-15"><!-- Article précedent -->
                         <div class="thumb mr-1">
@@ -133,7 +84,7 @@
                         </div>
                     </div><!-- Fin Article suivant -->
                 </div><!-- End Navigation -->
-                
+
                 <div class="comment-area px-15">
                     <h4>03 Commentaires</h4>
                     <div class="comment-row mb-1">
@@ -188,44 +139,44 @@
                         </div>
                     </div>
                 </div>
-                
+
                 <div class="comment-form px-15">
                     <h4>Laissez un commentaire</h4>
                     <form>
-                        <div class="form-group form-inline">
-                            <div class="form-group">
-                                <input type="text" class="form-control" placeholder="Votre nom">
+                        <div class="cc-form-group cc-form-inline">
+                            <div class="cc-form-group">
+                                <input type="text" class="cc-form-control" placeholder="Votre nom">
                             </div>
-                            <div class="form-group">
-                                <input type="text" class="form-control" placeholder="Votre prénom">
+                            <div class="cc-form-group">
+                                <input type="text" class="cc-form-control" placeholder="Votre prénom">
                             </div>
                         </div>
-                        
-                        <div class="form-group">
-                            <input type="email" class="form-control" placeholder="Votre email">
+
+                        <div class="cc-form-group">
+                            <input type="email" class="cc-form-control" placeholder="Votre email">
                         </div>
-                        
-                        <div class="form-group">
-                            <textarea cols="30" rows="10" class="form-control" placeholder="Votre message"></textarea>
+
+                        <div class="cc-form-group">
+                            <textarea cols="30" rows="10" class="cc-form-control" placeholder="Votre message"></textarea>
                         </div>
-                        
-                        <button class="btn btn-outline">Commenter</button>
+
+                        <button class="cc-btn cc-btn-outline">Commenter</button>
                     </form>
                 </div>
-                
+
             </div>
-    
+
             <div class="blog-right-side px-15">
                 <aside class="single-sidebar-widget search-widget">
-                    <div class="input-group">
-                        <input type="text" class="form-control" placeholder="Rechercher articles">
+                    <div class="cc-input-group">
+                        <input type="text" class="cc-form-control" placeholder="Rechercher articles">
                         <span class="input-group-btn">
-                                    <button class="btn btn-widget" type="button"><i class="fas fa-search"></i></button>
+                                    <button class="cc-btn btn-widget" type="button"><i class="fas fa-search"></i></button>
                                 </span>
                     </div>
                     <div class="br"></div>
                 </aside>
-        
+
                 <aside class="single-sidebar-widget author-widget t-center fw-300">
                     <img src="assets/imgs/mentors/m4.jpg" alt="" class="author-img img-rounded">
                     <h4>Coding city</h4>
@@ -238,25 +189,25 @@
                     <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Asperiores beatae delectus distinctio dolor dolore dolores doloribus excepturi explicabo hic, incidunt laboriosam magni odit optio, quo sed sit soluta ullam vel?</p>
                     <div class="br"></div>
                 </aside>
-        
+
                 <aside class="single-sidebar-widget newsletter-widget t-center fw-300">
                     <h4 class="widget-title">Newsletter</h4>
                     <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Asperiores commodi consequuntur corporis dolores hic labore maxime sed. Beatae blanditiis delectus dolor eius, error esse facilis, odit optio, perferendis quam vel!</p>
-                    <div class="form-group">
-                        <div class="input-group">
+                    <div class="cc-form-group">
+                        <div class="cc-input-group">
                             <div class="input-group-prepend">
                                 <div class="input-group-text">
                                     <i class="fas fa-envelope"></i>
                                 </div>
                             </div>
-                            <input type="text" class="form-control" placeholder="Entrez email">
+                            <input type="text" class="cc-form-control" placeholder="Entrez email">
                         </div>
                         <a href="#" class="bbtns">S'inscrire</a>
                     </div>
                     <p class="text-bottom"><small>Vous pouvez désister à tout moment</small></p>
                     <div class="br"></div>
                 </aside>
-        
+
                 <aside class="single-sidebar-widget tag-cloud-widget t-center fw-300">
                     <h4 class="widget-title">Liste des étiquettes</h4>
                     <ul class="list">
@@ -278,35 +229,3 @@
         </div>
     </div>
 </div>
-
-<!-- Footer section -->
-<footer class="footer py-70 bg-bw" id="footer">
-    <div class="container">
-        <div class="footer-blocks row">
-            <div class="footer-block f-links px-15"><!-- Footer links -->
-                <ul>
-                    <li><a href="#">A propos de nous</a></li>
-                    <li><a href="#">Nous écrire</a></li>
-                    <li><a href="#">Politique de confidentialité</a></li>
-                </ul>
-            </div><!-- End footer links -->
-            <div class="footer-block s-links px-15"><!-- Social links -->
-                <ul>
-                    <li><a href=""><i class="fab fa-facebook"></i></a></li>
-                    <li><a href=""><i class="fab fa-twitter"></i></a></li>
-                    <li><a href=""><i class="fab fa-youtube"></i></a></li>
-                    <li><a href=""><i class="fab fa-instagram"></i></a></li>
-                </ul>
-            </div><!-- End social links -->
-            
-            <div class="copyright" id="copyright">
-                &copy; | Coding City <script>document.write(new Date().getFullYear());</script> all rights reserved
-            </div>
-        </div>
-    </div>
-</footer><!-- End footer -->
-
-<!-- JavaScript loading -->
-<script type="text/javascript" src="assets/js/script.js"></script>
-</body>
-</html>

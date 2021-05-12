@@ -6,8 +6,8 @@
   }
 
   .nav-link {
-    padding: .35rem .75rem;
-    font-size: 1rem;
+    padding: .35rem 0;
+    font-size: 1em;
     font-weight: 400;
     color: inherit;
     line-height: 2;
@@ -18,7 +18,7 @@
 
     @media (max-width: $md) {
       padding: .5rem 1rem;
-      color: $sec-color;
+      color: $break-white;
     }
 
     &:hover, &:active, &.active, &.hover {
@@ -26,8 +26,8 @@
       border-bottom-color: $main-color;
 
       @media (max-width: $md) {
-        color: $break-white;
-        border-bottom-color: $break-white;
+        color: $font-color;
+        border-bottom-color: $font-color;
       }
     }
   }

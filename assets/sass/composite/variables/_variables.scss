@@ -11,6 +11,16 @@ $white: #fff;
 $break-white: #eaf6ff;
 $black: #000;
 
+//Backgrounds color
+.bg-orange {
+  background-color: $main-color;
+  color: $break-white;
+}
+
+.border-orange {
+  border-color: $main-color !important;
+}
+
 //media queries variables
 $xs: 572px;
 $sm: 768px;

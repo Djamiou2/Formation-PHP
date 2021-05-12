@@ -6,7 +6,6 @@ function menuToggle() {
     icon.addEventListener('click', menuHandle);
 
     function menuHandle() {
-        console.log(hamburger);
         if (!header.classList.contains('show')) {
             header.classList.add('show');
             icon.classList.remove('fa-bars');
@@ -19,4 +18,18 @@ function menuToggle() {
     }
 }
 
+
+function responsiveDropdownToggle() {
+    let dropdown = document.querySelector('.dropdown-menu');
+    document.querySelector('.nav-item.submenu').addEventListener('click', () => {
+        if (!dropdown.classList.contains('show')) {
+            dropdown.classList.add('show')
+        } else {
+            dropdown.classList.remove('show')
+        }
+    })
+}
+
 menuToggle();
+
+responsiveDropdownToggle();

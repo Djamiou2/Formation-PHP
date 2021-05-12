@@ -11,32 +11,13 @@
         font-size: 1.2rem;
     }
 
-    .form-inline {
-        .form-group {
+    .cc-form-inline {
+        .cc-form-group {
             width: 50%;
             padding-right: 1rem;
         }
     }
-
-    .form-control {
-        width: 100%;
-        padding: 8px 20px;
-        font-size: 14px;
-        color: $font-color;
-        background-color: $white;
-        border: 1px solid transparent;
-        transition: .25s ease;
-
-        &:hover, &:focus {
-            border-color: transparentize($main-color, .75);
-        }
-
-        &:focus {
-            box-shadow: 1px 1px 3px transparentize($main-color, .4);
-        }
-    }
-
-    textarea.form-control {
+    textarea.cc-form-control {
         height: auto;
         resize: none;
     }

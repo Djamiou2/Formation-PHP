@@ -12,9 +12,9 @@
     }
 
     .search-widget {
-        .input-group {
+        .cc-input-group {
 
-            .form-control {
+            .cc-form-control {
                 width: 100%;
                 padding: .357rem .75rem .375rem 20px;
                 font-size: 14px;
@@ -69,12 +69,12 @@
     }
 
     .newsletter-widget {
-        .form-group {
+        .cc-form-group {
             margin-bottom: 1rem;
             display: flex;
             flex-flow: row;
 
-            .input-group {
+            .cc-input-group {
                 .input-group-prepend {
                     display: flex;
                     margin-right: -1px;
@@ -95,7 +95,7 @@
                     }
                 }
 
-                .form-control {
+                .cc-form-control {
                     flex: 1 1 auto;
                     width: 1%;
                     margin-bottom: 0;

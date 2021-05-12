@@ -18,7 +18,7 @@
   @media (max-width: $md) {
     &.show {
       .navigation {
-        transform: translateX(0);
+        transform: translateX(100%);
         visibility: visible;
       }
     }
@@ -46,5 +46,5 @@
 
 
 .header.light-header {
-  color: $main-color;
+  color: $font-color;
 }

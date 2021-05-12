@@ -15,24 +15,7 @@
         }
     }
 
-    .form-control {
-        width: 100%;
-        padding: .375rem 1rem;
-        font-size: 13px;
-        color: #999999;
-        border: 1px solid #f7f7f7;
-        transition: box-shadow .25s ease;
-
-        &:hover, &:focus {
-            border-color: transparentize($main-color, .75);
-        }
-
-        &:focus {
-            box-shadow: 1px 1px 3px transparentize($main-color, .4);
-        }
-    }
-
-    textarea.form-control {
+    textarea.cc-form-control {
         height: 150px;
         resize: none;
     }
