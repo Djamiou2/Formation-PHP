@@ -1,7 +1,8 @@
 <?php
 
-function get_post_data(array $tableData, string $field) {
-    if (!isset($tableData[$field])) return '';
+function get_post_data(array $tableData, string $field, ?string $databaseValue = null) {
+    if (!isset($tableData[$field]) && !isset($databaseValue)) return '';
+    if (isset($databaseValue) && !isset($tableData[$field])) return htmlentities($databaseValue);
 
     return htmlentities($tableData[$field]);
 }

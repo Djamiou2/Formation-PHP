@@ -54,12 +54,14 @@ if (isset($_POST['add_user'])) {
 
 
     if (empty($errors)) {
+        $password = password_hash('1234567890', PASSWORD_ARGON2I);
        //1) Enregistrer l'utilisateur en base de données
-        $q = $db->prepare("INSERT INTO user (name, firstname, email, role) VALUES (:name, :firstname, :email, :role)");
+        $q = $db->prepare("INSERT INTO user (name, firstname, email, password, role) VALUES (:name, :firstname, :email, :password, :role)");
         $status = $q->execute([
            'name' => $name,
            'firstname' => $firstname,
            'email' => $email,
+           'password' => $password,
            'role' => $role
         ]);
 

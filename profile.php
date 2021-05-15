@@ -7,9 +7,120 @@ $title = "{$_SESSION['name']} {$_SESSION['firstname']}";
 
 require_once 'partials/_header.php';
 
-
+if (!isset($_GET['id']) || (int)$_GET['id'] <= 0 || $_GET['id'] !== $_SESSION['id']) {
+    redirect_to('login.php');
+}
 if (!logged_in()) redirect_to('login.php');
 
+$q = $db->prepare("SELECT * FROM user_add ua JOIN user u ON ua.user_id = u.id WHERE u.id = :id");
+$q->execute(['id' => $_GET['id']]);
+$userInfo = $q->fetch(PDO::FETCH_OBJ);
+
+$errors = [];
+$profileForm = false;
+$passwordForm = false;
+var_dumping($user, $_SESSION);
+
+//MISE A JOUR DU PROFIL
+if (isset($_POST['update_user'])) {
+    $submitButton = array_pop($_POST);
+    $_POST = sanitize($_POST);
+    extract($_POST);
+    $bornTimestamp = strtotime($born_at);
+    if (!$bornTimestamp) {
+        $errors['born_at'] = 'Date invalide';
+    } else {
+        $formatDate =  date('Y-m-d',  $bornTimestamp);
+    }
+    if (!empty($_FILES['image']['name'])) {
+        if ($_FILES['image']['error'] === 0) {
+            extract($_FILES);
+            $tmpImg = $image['tmp_name'] ?? null;
+            $nameImg = $image['name'] ?? null;
+            $typeImg = $image['type'] ?? null;
+            if (!in_array($typeImg, ['image/jpeg', 'image/png', 'image/jpg'])) {
+                $errors['image'] = 'Image invalide';
+            }
+        } else {
+            $errors['image'] = 'image invalide';
+        }
+    }
+    if (!file_exists(BASE_FILE_ROOT .'/profile')) {
+        mkdir( BASE_FILE_ROOT .'/profile', 0777, true);
+    }
+    $profileImageFolder = BASE_FILE_ROOT .'/profile';
+    $pathImg = $profileImageFolder . '/' . (!isset($nameImg) ? DEFAULT_PROFILE_PIC : $nameImg);
+
+
+    if (empty($errors)) {
+        $q = $db->prepare("UPDATE user_add ua JOIN user u ON ua.user_id = u.id SET ua.born_at = :born_at, ua.gender = :gender, ua.adress = :adress, ua.phone = :phone, ua.image = :image, ua.other = :bio, u.email = :email WHERE u.id = :id");
+        $success = $q->execute([
+            'born_at'       =>      $formatDate,
+            'gender'        =>      $gender,
+            'adress'        =>      $adress,
+            'phone'         =>      $phone,
+            'image'         =>      $pathImg,
+            'bio'           =>      $bio,
+            'email'         =>      $email,
+            'id'            =>      $_SESSION['id']
+        ]);
+
+        if ($success) {
+            if(move_uploaded_file($tmpImg, $pathImg)) $_SESSION['success'] = 'Image mise à jour';
+
+            $_SESSION['info'] = 'Profil mis à jour avec succès.';
+            $profileForm = false;
+            redirect_to('profile.php?id=' . ds_info('id'));
+        } else {
+            $_SESSION['warning'] = 'Echec lors de la mise à jour';
+        }
+    }
+    $profileForm = true;
+}
+
+
+//MISE A JOUR DU MOT DE PASSE
+if (isset($_POST['change_password'])) {
+    $submitButton = array_pop($_POST);
+    $_POST = sanitize($_POST);
+    if (!not_empty($_POST)) {
+        $errors['global'] = 'Veuillez bien remplir le formulaire';
+        $_SESSION['warning'] = $errors['global'];
+    }
+    extract($_POST);
+    if (empty($actual_password)) $errors['actual_password'] = 'Champ Obligatoire';
+    if ($actual_password !== $userInfo->password) $errors['actual_password'] = 'Mot de passe incorrect';
+    if (empty($new_password)) {
+        $errors['new_password'] = 'Champ Obligatoire';
+    } else if (!length_validation($new_password, 8, 20)) {
+        $errors['new_password'] = 'Compris entre 8 et 20 caractères';
+    }
+    if (empty($confirm_password)) {
+        $errors['confirm_password'] = 'Champ Obligatoire';
+    } else if (!length_validation($confirm_password, 8, 20)) {
+        $errors['confirm_password'] = 'Compris entre 8 et 20 caractères';
+    }
+
+    if (empty($errors)) {
+        $password = password_hash($new_password, PASSWORD_ARGON2I);
+        $q = $db->prepare("UPDATE user SET password = :password WHERE id = :id");
+        $success = $q->execute([
+            'password' => $password,
+            'id' => $_SESSION['id']
+        ]);
+        if ($success) {
+            $_SESSION['info'] = 'Mot de passe mis à jour avec succès';
+            $passwordForm = false;
+            redirect_to('profile.php?id=' . ds_info('id'));
+        }else {
+            $_SESSION['warning'] = 'Echec lors de la mise à jour du mot de passe';
+        }
+    }
+    var_dumping($actual_password, $userInfo->password);
+
+
+    $passwordForm = true;
+}
 ?>
 
 

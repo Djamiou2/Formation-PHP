@@ -30,18 +30,17 @@ if (isset($_POST['login'])) {
     }
 
     if (empty($errors)) {
-        $q = $db->prepare("SELECT * FROM user WHERE email = :username AND active = '1'");
+        $q = $db->prepare("SELECT * FROM user u JOIN user_add ua on u.id = ua.user_id WHERE email = :username AND active = '1'");
         $q->execute(['username' => $username]);
 
         $user = $q->fetch(PDO::FETCH_OBJ);
-        if (!$user || $password !== $user->password) {
+        if (!$user || !password_verify($password, $user->password)) {
             $_SESSION['warning'] = "Identifiant ou mot de passe invalide.";
         } else {
-            $_SESSION['id'] = $user->id;
-            $_SESSION['name'] = $user->name;
-            $_SESSION['firstname'] = $user->firstname;
-            $_SESSION['email'] = $user->email;
-            $_SESSION['role'] = $user->role;
+            foreach ($user as $index => $item) {
+                $_SESSION[$index] = $item;
+                if ($index === 'password') unset($_SESSION[$index]);
+            }
             $_SESSION['success'] = "Bienvenue {$_SESSION['name']} {$_SESSION['firstname']}.";
             redirect_to('profile.php?id=' . $user->id);
         }

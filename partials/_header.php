@@ -93,7 +93,7 @@ function set_active(string $path = null) {
 
                                 <a href="#" class="nav-link d-flex align-items-center <?= set_active() ?>" >
                                     <strong><?= ds_info('firstname') . ' ' . ds_info('name') ?></strong>
-                                    <img src="assets/imgs/cc_default.png" alt="" width="32" height="32" class="rounded-circle ms-2">
+                                    <img src="<?= ds_info('image') ?>" alt="" width="32" height="32" class="rounded-circle ms-2">
                                 </a>
 
                                 <ul class="dropdown-menu"><!-- Dropdown menu -->
