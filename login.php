@@ -9,7 +9,6 @@ require_once 'partials/_header.php';
 
 if (logged_in()) redirect_to('profile.php?id=' . $_SESSION['id']);
 
-
 $errors = [];
 if (isset($_POST['login'])) {
     $submit = array_pop($_POST);
@@ -30,7 +29,7 @@ if (isset($_POST['login'])) {
     }
 
     if (empty($errors)) {
-        $q = $db->prepare("SELECT * FROM user u JOIN user_add ua on u.id = ua.user_id WHERE email = :username AND active = '1'");
+        $q = $db->prepare("SELECT u.id, name, firstname, email, password, created_at, role, active, user_id, born_at, gender, adress, phone, image, other, user_id FROM user u LEFT JOIN user_add ua on u.id = ua.user_id WHERE email = :username AND active = '1'");
         $q->execute(['username' => $username]);
 
         $user = $q->fetch(PDO::FETCH_OBJ);

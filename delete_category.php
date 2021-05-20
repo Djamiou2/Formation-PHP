@@ -13,9 +13,14 @@ if (!isset($_GET['id']) || (int)$_GET['id'] <= 0) {
 }
 $id = (int)$_GET['id'];
 
+$db->beginTransaction();
+//Suppression des catégories liées aux articles
+$q = $db->prepare("DELETE FROM post_category WHERE category_id = :id");
+$q->execute(['id' => $id]);
 //Suppression de la catégorie
 $q = $db->prepare("DELETE FROM category WHERE id = :id");
-$success = $q->execute(['id' => $id]);
+$q->execute(['id' => $id]);
+$success = $db->commit();
 
 if ($success) {
     $_SESSION['success'] = "Catégorie #$id supprimée avec succès";

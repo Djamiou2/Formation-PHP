@@ -1,14 +1,16 @@
 <?php
-require_once 'includes/db.php';
 require_once 'includes/session_functions.php';
+require_once 'includes/db.php';
 require_once 'includes/functions.php';
 
 $title = 'Ajouter une catégorie.';
 
-if (!admin() || !super()) {
+if (!super() && !admin()) {
     $_SESSION['info'] = 'Accès refusé.';
     redirect_to('category_list.php');
 }
+
+
 
 require_once 'partials/_header.php';
 
@@ -39,8 +41,11 @@ if (isset($_POST['add_category'])) {
     if (empty($errors)) {
         $db->beginTransaction();
         foreach ($categories as $category) {
-            $q = $db->prepare("INSERT INTO category (title) VALUES(:title)");
-            $q->execute(['title' => $category]);
+            $q = $db->prepare("INSERT INTO category (title, user_id) VALUES(:title, :user_id)");
+            $q->execute([
+                'title'     =>  $category,
+                'user_id'   =>  $_SESSION['id']
+            ]);
         }
         $total = $db->lastInsertId();
         if($db->commit()) {

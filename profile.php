@@ -1,6 +1,6 @@
 <?php
-require_once 'includes/db.php';
 require_once 'includes/session_functions.php';
+require_once 'includes/db.php';
 require_once 'includes/functions.php';
 
 $title = "{$_SESSION['name']} {$_SESSION['firstname']}";
@@ -12,14 +12,14 @@ if (!isset($_GET['id']) || (int)$_GET['id'] <= 0 || $_GET['id'] !== $_SESSION['i
 }
 if (!logged_in()) redirect_to('login.php');
 
-$q = $db->prepare("SELECT * FROM user_add ua JOIN user u ON ua.user_id = u.id WHERE u.id = :id");
-$q->execute(['id' => $_GET['id']]);
+$q = $db->prepare("SELECT u.id, name, firstname, email, password, created_at, role, active, born_at, gender, adress, phone, image, other, user_id  FROM user u LEFT JOIN user_add ua ON ua.user_id = u.id WHERE u.id = :id");
+$q->execute(['id' => $_SESSION['id']]);
 $userInfo = $q->fetch(PDO::FETCH_OBJ);
 
 $errors = [];
 $profileForm = false;
 $passwordForm = false;
-var_dumping($user, $_SESSION);
+
 
 //MISE A JOUR DU PROFIL
 if (isset($_POST['update_user'])) {
@@ -53,7 +53,7 @@ if (isset($_POST['update_user'])) {
 
 
     if (empty($errors)) {
-        $q = $db->prepare("UPDATE user_add ua JOIN user u ON ua.user_id = u.id SET ua.born_at = :born_at, ua.gender = :gender, ua.adress = :adress, ua.phone = :phone, ua.image = :image, ua.other = :bio, u.email = :email WHERE u.id = :id");
+        $q = $db->prepare("UPDATE user u RIGHT JOIN user_add ua ON u.id = ua.user_id SET ua.born_at = :born_at, ua.gender = :gender, ua.adress = :adress, ua.phone = :phone, ua.image = :image, ua.other = :bio, u.email = :email WHERE u.id = :id");
         $success = $q->execute([
             'born_at'       =>      $formatDate,
             'gender'        =>      $gender,
@@ -67,7 +67,13 @@ if (isset($_POST['update_user'])) {
 
         if ($success) {
             if(move_uploaded_file($tmpImg, $pathImg)) $_SESSION['success'] = 'Image mise à jour';
-
+            $q = $db->prepare("SELECT u.id, name, firstname, email, created_at, role, active, born_at, gender, adress, phone, image, other, user_id  FROM user u LEFT JOIN user_add ua ON ua.user_id = u.id WHERE u.id = :id");
+            $q->execute(['id' => $_SESSION['id']]);
+            $userInfo = $q->fetch(PDO::FETCH_OBJ);
+            foreach ($userInfo as $index => $info) {
+                $_SESSION[$index] = '';
+                $_SESSION[$index] = $info;
+            }
             $_SESSION['info'] = 'Profil mis à jour avec succès.';
             $profileForm = false;
             redirect_to('profile.php?id=' . ds_info('id'));
@@ -83,13 +89,8 @@ if (isset($_POST['update_user'])) {
 if (isset($_POST['change_password'])) {
     $submitButton = array_pop($_POST);
     $_POST = sanitize($_POST);
-    if (!not_empty($_POST)) {
-        $errors['global'] = 'Veuillez bien remplir le formulaire';
-        $_SESSION['warning'] = $errors['global'];
-    }
     extract($_POST);
     if (empty($actual_password)) $errors['actual_password'] = 'Champ Obligatoire';
-    if ($actual_password !== $userInfo->password) $errors['actual_password'] = 'Mot de passe incorrect';
     if (empty($new_password)) {
         $errors['new_password'] = 'Champ Obligatoire';
     } else if (!length_validation($new_password, 8, 20)) {
@@ -100,6 +101,7 @@ if (isset($_POST['change_password'])) {
     } else if (!length_validation($confirm_password, 8, 20)) {
         $errors['confirm_password'] = 'Compris entre 8 et 20 caractères';
     }
+    if (!password_verify($actual_password, $userInfo->password)) $errors['actual_password'] = 'Mot de passe incorrect';
 
     if (empty($errors)) {
         $password = password_hash($new_password, PASSWORD_ARGON2I);
@@ -116,8 +118,6 @@ if (isset($_POST['change_password'])) {
             $_SESSION['warning'] = 'Echec lors de la mise à jour du mot de passe';
         }
     }
-    var_dumping($actual_password, $userInfo->password);
-
 
     $passwordForm = true;
 }

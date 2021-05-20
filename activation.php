@@ -21,7 +21,7 @@ if (!$user) {
     redirect_to('index.php');
 }
 
-$confirm_token = sha1($user->name.$user->email.'1234567890');
+$confirm_token = sha1($user->name.$user->email.password_hash('1234567890', PASSWORD_ARGON2I));
 if ($token === $confirm_token) {
     //On active le compte
     $q = $db->prepare("UPDATE user SET active = '1' WHERE email = :email");

@@ -12,10 +12,14 @@ if (!isset($_GET['id']) || (int)$_GET['id'] <= 0) {
     redirect_to('user_list.php');
 }
 $id = (int)$_GET['id'];
-
-//Suppression de la catégorie
+$db->beginTransaction();
+//Suppression des infos additives
+$q = $db->prepare("DELETE FROM user_add WHERE user_id = :id");
+$q->execute(['id' => $id]);
+//Suppression de l'utilisateur
 $q = $db->prepare("DELETE FROM user WHERE id = :id");
-$success = $q->execute(['id' => $id]);
+$q->execute(['id' => $id]);
+$success = $db->commit();
 
 if ($success) {
     $_SESSION['success'] = "Utilisateur #$id supprimé avec succès";

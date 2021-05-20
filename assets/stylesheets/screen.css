@@ -290,6 +290,11 @@ ul, ol, li, dl {
   border-radius: 50%;
 }
 
+.img-list {
+  width: 120px;
+  height: auto;
+}
+
 .cc-form-group {
   margin-bottom: 1rem;
 }
@@ -596,9 +601,8 @@ ul, ol, li, dl {
   border-top: .5rem solid #ffa400;
 }
 .banner.single-banner {
-  background: linear-gradient(to bottom, rgba(0, 0, 0, 0.75) 75%, rgba(255, 255, 255, 0.4)), url("../imgs/blog/main-blog/mainBlog-2.jpg") center no-repeat;
-  -webkit-background-size: cover;
-  background-size: cover;
+  -webkit-background-size: cover !important;
+  background-size: cover !important;
   height: 200px;
 }
 .banner.single-banner .b-title {
@@ -982,6 +986,7 @@ ul, ol, li, dl {
   padding-bottom: 1rem;
 }
 .blog-area .blog-info .post-tag a {
+  display: inline-block;
   font: 300 0.9em/1.2 "Ubuntu", sans-serif;
   color: #495454;
   transition: .25s ease-in;
@@ -1019,6 +1024,12 @@ ul, ol, li, dl {
 .blog-area .blog-left-side .blog-item .blog-post {
   width: 75%;
   flex: 0 0 75%;
+}
+@media (max-width: 992px) {
+  .blog-area .blog-left-side .blog-item .blog-post {
+    width: 100%;
+    flex: 0 0 100%;
+  }
 }
 .blog-area .blog-left-side .blog-item .blog-post .blog-details {
   padding-top: 1rem;

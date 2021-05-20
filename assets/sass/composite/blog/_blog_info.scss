@@ -11,6 +11,7 @@
         padding-bottom: 1rem;
 
         a {
+            display: inline-block;
             font: 300 .9em/1.2 $ubuntu;
             color: $font-color;
             transition: .25s ease-in;

@@ -10,7 +10,7 @@ echo display_header('Bienvenue sur votre profil ' . $param, "user-cog"); ?>
         <div class="col-md-3 cc-profile-left">
             <div class="d-flex flex-column p-3 text-white bg-dark h-100">
                 <div class="card bg-transparent border-0 rounded-0">
-                    <img src="<?= ds_info('image') ?>" class="card-img-top img-rounded w-50 mx-auto"
+                    <img src="<?= ds_info('image') ?? 'assets/imgs/cc_default.png'  ?>" class="card-img-top img-rounded w-50 mx-auto"
                          alt="Image de profil par défaut">
                     <div class="card-body px-0 text-center">
                         <h5 class="card-title mb-0"><?= $param ?></h5>
@@ -22,10 +22,11 @@ echo display_header('Bienvenue sur votre profil ' . $param, "user-cog"); ?>
                     </div>
                     <div class="dropdown-divider border-orange"></div>
                     <nav class="nav flex-column">
-                        <a class="nav-link text-white-50 active" href="#"><i class="fas fa-home"></i> Vue d'ensemble</a>
-                        <a class="nav-link text-white-50" href="#"><i class="fas fa-cog"></i> Paramètres</a>
-                        <a class="nav-link text-white-50" href="#"><i class="fas fa-check"></i> Prérogatives</a>
-                        <a class="nav-link text-white-50" href="#"><i class="fas fa-question"></i> Support</a>
+                        <a class="nav-link text-white-50 active" href="admin.php"><i class="fas fa-tachometer-alt"></i> Tableau de bord</a>
+                        <a class="nav-link text-white-50" href="post_list.php"><i class="fas fa-heading"></i>Articles</a>
+                        <a class="nav-link text-white-50" href="user_list.php"><i class="fas fa-users"></i>Utilisateurs</a>
+                        <a class="nav-link text-white-50" href="#"><i class="fas fa-comments"></i>Commentaires</a>
+                        <a class="nav-link text-white-50" href="#"><i class="fas fa-question"></i>Aide</a>
                     </nav>
                     <div class="dropdown-divider border-orange"></div>
                     <div class="card-body text-capitalize text-center row">
@@ -125,7 +126,7 @@ echo display_header('Bienvenue sur votre profil ' . $param, "user-cog"); ?>
                                                             class="fas fa-calendar-alt"></i></span>
                                                 <input type="text" class="form-control"
                                                        placeholder="Ex: 1998-10-31 ou 1998/10/31" name="born_at"
-                                                       value="<?= get_post_data($_POST, 'born_at', $userInfo->born_at) ?>">
+                                                       value="<?= get_post_data($_POST, 'born_at', $userInfo->born_at ?? '') ?>">
                                                 <?= display_errors($errors, 'born_at') ?>
                                             </div>
                                         </div>
@@ -153,7 +154,7 @@ echo display_header('Bienvenue sur votre profil ' . $param, "user-cog"); ?>
                                                             class="fas fa-user"></i></span>
                                                 <input type="text" class="form-control"
                                                        placeholder="Ex:. Avenue Kenedy - Carrefour Picart" name="adress"
-                                                       value="<?= get_post_data($_POST, 'adress', $userInfo->adress) ?>">
+                                                       value="<?= get_post_data($_POST, 'adress', $userInfo->adress ?? '') ?>">
                                                 <?= display_errors($errors, 'adress') ?>
                                             </div>
                                         </div>
@@ -163,7 +164,7 @@ echo display_header('Bienvenue sur votre profil ' . $param, "user-cog"); ?>
                                                 <span class="input-group-text" id="basic-addon1"><i
                                                             class="fas fa-at"></i></span>
                                                 <input type="text" class="form-control" placeholder="Entrez votre email"
-                                                       name="email" value="<?= get_post_data($_POST, 'email') ?>">
+                                                       name="email" value="<?= get_post_data($_POST, 'email', $userInfo->email ?? '') ?>">
                                                 <?= display_errors($errors, 'email') ?>
                                             </div>
                                         </div>
@@ -174,7 +175,7 @@ echo display_header('Bienvenue sur votre profil ' . $param, "user-cog"); ?>
                                                             class="fas fa-phone-alt"></i></span>
                                                 <input type="text" class="form-control" placeholder="Ex: +224004695278"
                                                        name="phone"
-                                                       value="<?= get_post_data($_POST, 'phone', $userInfo->phone) ?>">
+                                                       value="<?= get_post_data($_POST, 'phone', $userInfo->phone ?? '') ?>">
                                                 <?= display_errors($errors, 'phone') ?>
                                             </div>
                                         </div>
@@ -193,7 +194,7 @@ echo display_header('Bienvenue sur votre profil ' . $param, "user-cog"); ?>
                                                 <span class="input-group-text"><i class="fas fa-info-circle"></i></span>
                                                 <textarea class="form-control" id="bio"
                                                           placeholder="Ex:. Parlez-nous de vous"
-                                                          name="bio"><?= get_post_data($_POST, 'bio', $userInfo->other) ?> </textarea>
+                                                          name="bio"><?= get_post_data($_POST, 'bio', $userInfo->other ?? '') ?> </textarea>
                                                 <?= display_errors($errors, 'bio') ?>
                                             </div>
                                         </div>

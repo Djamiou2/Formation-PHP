@@ -47,7 +47,6 @@
                                 <td><?= $user->role ?></td>
                                 <td><?= time_format($user->created_at) ?></td>
                                 <td>
-                                    <a href="edit_user.php?id=<?= $user->id ?>" class="btn btn-sm btn-primary rounded-0"><i class="fas fa-edit"></i></a>
                                     <a href="delete_user.php?id=<?= $user->id ?>" onclick="return(confirm('Confirmer la suppression de cet élément'))" class="btn btn-sm btn-danger rounded-0"><i class="fas fa-trash-alt"></i>
                                     </a>
                                     <button type="button" class="btn btn-sm btn-dark rounded-0" data-bs-toggle="modal" data-bs-target="#<?= $user->name.$user->firstname.$user->id ?>"><i class="fas fa-info-circle"></i></button>
@@ -59,39 +58,7 @@
             </div>
             <nav class="blog-pagination mb-2"><!-- Pagination -->
                 <ul class="cc-pagination">
-                    <?php if($totalPages > 1): ?>
-                        <?php if($page > 1 && $totalPages > 1): ?>
-                            <li class="cc-page-item">
-                                <a href="?<?= http_build_query(array_merge($_GET, ['p' =>$page - 1]))?>" class="page-path <?= ($page > 1 && $totalPages > 0) ? '' : 'disabled'?>">
-                                    <span><i class="fas fa-angle-double-left"></i></span>
-                                </a>
-                            </li>
-                        <?php endif;?>
-
-                        <?php if($totalPages >= 1 && $page <= $totalPages): ?>
-                            <li class="cc-page-item"><a href="?<?= http_build_query(array_merge($_GET, ['p' => 1]))?>" class="page-path <?= (!empty($_GET['p']) && $_GET['p'] == 1) ? ' active' : '' ?> ?>">1</a></li>
-                            <?php
-                            $i = max(2, $page - 2);
-                            if ($i > 2) echo '<li class="p-1">...</li>';
-                            ?>
-                            <?php for (; $i < min($page + 2, $totalPages); $i++):
-                                ?>
-                                <li class="cc-page-item"><a href="?<?= http_build_query(array_merge($_GET, ['p' =>$i]))?>" class="page-path<?= (!empty($_GET['p']) && $_GET['p'] == $i) ? ' active' : '' ?>"><?= $i ?></a></li>
-                            <?php endfor; ?>
-                            <?php
-                            if ($i != $totalPages) echo '<li class="p-1">...</li>';
-                            ?>
-                            <li class="cc-page-item"><a href="?<?= http_build_query(array_merge($_GET, ['p' =>$totalPages]))?>" class="page-path <?= (!empty($_GET['p']) && $_GET['p'] == $totalPages) ? ' active' : '' ?> ?>"><?= $totalPages ?></a></li>
-                        <?php endif; ?>
-
-                        <?php if($totalPages > 1 && $page < $totalPages): ?>
-                            <li class="cc-page-item">
-                                <a href="?<?= http_build_query(array_merge($_GET, ['p' =>$page + 1]))?>" class="page-path  <?= ($totalPages > 1 && $page < $totalPages) ? '' : 'disabled'?>">
-                                    <span><i class="fas fa-angle-double-right"></i></span>
-                                </a>
-                            </li>
-                        <?php endif; ?>
-                    <?php endif;?>
+                    <?= display_pagination($totalPages) ?>
                 </ul>
             </nav><!-- End pagination -->
         </div>

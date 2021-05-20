@@ -5,6 +5,10 @@
     .blog-post {
         width: 75%;
         flex: 0 0 75%;
+        @media(max-width: $md) {
+            width: 100%;
+            flex: 0 0 100%;
+        }
 
         .blog-details {
             padding-top: 1rem;

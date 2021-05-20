@@ -56,85 +56,51 @@
     <div class="container">
         <div class="area-wrapper row">
             <div class="blog-left-side px-15"><!-- Partie des catégorie et information sur l'auteur -->
-                <article class="blog-item row">
-                    <div class="blog-info px-15">
-                        <div class="post-tag">
-                            <a href="#" class="active">Lorem.</a>
-                            <a href="#">Lorem.</a>
-                            <a href="#">Lorem.</a>
-                            <a href="#">Lorem.</a>
+                <?php foreach ($posts as $post): ?>
+                    <article class="blog-item row">
+                        <div class="blog-info px-15">
+                            <div class="post-tag">
+                                <?php $categories = get_categories_for_articles($post->id);
+                                foreach ($categories as $category):
+                                ?>
+                                    <a href="#"><?= $category->title ?>,</a>
+                                <?php endforeach; ?>
+                            </div>
+                            <ul class="blog-meta">
+                                <li class="author"><a href="#"><?= concatenate($post->name, $post->firstname) ?><i class="fas fa-user"></i></a></li>
+                                <li class="date"><a href="#"><?= time_format($post->created_at) ?><i class="fas fa-calendar-alt"></i></a></li>
+                                <li class="consulted"><a href="#">Consulté 2M de fois<i class="fas fa-eye"></i></a></li>
+                                <li class="comments"><a href="#">5069 Commentaires<i class="fas fa-comment"></i></a></li>
+                            </ul>
                         </div>
-                        <ul class="blog-meta">
-                            <li class="author"><a href="#">Coding City<i class="fas fa-user"></i></a></li>
-                            <li class="date"><a href="#">17 Fev. 2021<i class="fas fa-calendar-alt"></i></a></li>
-                            <li class="consulted"><a href="#">Consulté 2M de fois<i class="fas fa-eye"></i></a></li>
-                            <li class="comments"><a href="#">5069 Commentaires<i class="fas fa-comment"></i></a></li>
-                        </ul>
-                    </div>
-                    <div class="blog-post px-15">
-                        <img src="assets/imgs/blog/main-blog/mainBlog-1.jpeg" alt="" class="img">
-                        <div class="blog-details">
-                            <a href="#"><h2>Lorem ipsum dolor sit amet, consectetur adipisicing elit.</h2></a>
-                            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aliquam corporis et illum in iure, laborum libero, natus nihil praesentium quae quo sed unde voluptatem. Error minima molestiae nobis qui voluptatem. Lorem ipsum dolor sit amet, consectetur adipisicing elit. A cum cumque cupiditate deleniti dignissimos dolore, ducimus ex illo illum ipsa, ipsam itaque natus nemo nostrum voluptas. Accusantium et quos voluptates.</p>
-                            <a href="#" class="cc-btn">Lire l'article</a>
+                        <div class="blog-post px-15">
+                            <img src="<?= $post->image ?>" alt="<?= $post->title ?>" class="img">
+                            <div class="blog-details">
+                                <a href="single.php?id=<?= $post->id ?>"><h2><?= $post->title ?></h2></a>
+                                <p><?= nl2br(mb_substr($post->content, 0, 100)) ?></p>
+                                <a href="single.php?id=<?= $post->id ?>" class="cc-btn">Lire l'article</a>
+                            </div>
                         </div>
-                    </div>
-                </article>
-                <article class="blog-item row">
-                    <div class="blog-info px-15">
-                        <div class="post-tag"><!-- Categories -->
-                            <a href="#" class="active">Lorem.</a>
-                            <a href="#">Lorem.</a>
-                            <a href="#">Lorem.</a>
-                            <a href="#">Lorem.</a>
-                        </div><!-- Fin category -->
-
-                        <ul class="blog-meta"><!-- Info sur l'auteur -->
-                            <li class="author"><a href="#">Coding City<i class="fas fa-user"></i></a></li>
-                            <li class="date"><a href="#">17 Fev. 2021<i class="fas fa-calendar-alt"></i></a></li>
-                            <li class="consulted"><a href="#">Consulté 2M de fois<i class="fas fa-eye"></i></a></li>
-                            <li class="comments"><a href="#">5069 Commentaires<i class="fas fa-comment"></i></a></li>
-                        </ul><!-- Fin info sur l'auteur -->
-                    </div>
-
-                    <div class="blog-post px-15"><!-- Article en lui meme -->
-                        <img src="assets/imgs/blog/main-blog/mainBlog-2.jpg" alt="" class="img">
-                        <div class="blog-details">
-                            <a href="#"><h2>Lorem ipsum dolor sit amet, consectetur adipisicing elit.</h2></a>
-                            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aliquam corporis et illum in iure, laborum libero, natus nihil praesentium quae quo sed unde voluptatem. Error minima molestiae nobis qui voluptatem. Lorem ipsum dolor sit amet, consectetur adipisicing elit. A cum cumque cupiditate deleniti dignissimos dolore, ducimus ex illo illum ipsa, ipsam itaque natus nemo nostrum voluptas. Accusantium et quos voluptates.</p>
-                            <a href="#" class="cc-btn">Lire l'article</a>
-                        </div>
-                    </div><!-- Fin Article -->
-                </article>
+                    </article>
+                <?php endforeach; ?>
                 <nav class="blog-pagination"><!-- Pagination -->
                     <ul class="cc-pagination">
-                        <li class="cc-page-item">
-                            <a href="#" class="page-path"><span>
-                                        <i class="fas fa-angle-double-left"></i>
-                                    </span></a>
-                        </li>
-                        <li class="cc-page-item"><a href="#" class="page-path">00</a></li>
-                        <li class="cc-page-item"><a href="#" class="page-path active">01</a></li>
-                        <li class="cc-page-item"><a href="#" class="page-path">00</a></li>
-                        <li class="cc-page-item"><a href="#" class="page-path">00</a></li>
-                        <li class="cc-page-item"><a href="#" class="page-path">00</a></li>
-                        <li class="cc-page-item">
-                            <a href="#" class="page-path disabled"><span>
-                                        <i class="fas fa-angle-double-right"></i>
-                                    </span></a>
-                        </li>
+                        <?= display_pagination($totalPages) ?>
                     </ul>
                 </nav><!-- End pagination -->
             </div><!-- Fin Partie des catégorie et information sur l'auteur -->
 
             <div class="blog-right-side px-15">
                 <aside class="single-sidebar-widget search-widget">
-                    <div class="cc-input-group">
-                        <input type="text" class="form-control" placeholder="Rechercher articles">
-                        <span class="input-group-btn">
-                                    <button class="cc-btn btn-widget" type="button"><i class="fas fa-search"></i></button>
-                                </span>
-                    </div>
+                    <form action="">
+                        <div class="cc-input-group">
+                            <input type="text" class="cc-form-control" name="q" value="<?= get_get_data($_GET, 'q') ?>" placeholder="Rechercher articles">
+                            <span class="input-group-btn">
+                            <button class="cc-btn btn-widget"><i class="fas fa-search"></i></button>
+                        </span>
+                        </div>
+                    </form>
+
                     <div class="br"></div>
                 </aside>
 
@@ -161,7 +127,7 @@
                                     <i class="fas fa-envelope"></i>
                                 </div>
                             </div>
-                            <input type="text" class="form-control" placeholder="Entrez email">
+                            <input type="text" class="cc-form-control" placeholder="Entrez email">
                         </div>
                         <a href="#" class="bbtns">S'inscrire</a>
                     </div>
@@ -172,18 +138,9 @@
                 <aside class="single-sidebar-widget tag-cloud-widget t-center fw-300">
                     <h4 class="widget-title">Liste des étiquettes</h4>
                     <ul class="list">
-                        <li><a href="#">Technologie</a></li>
-                        <li><a href="#">Java</a></li>
-                        <li><a href="#">PHP</a></li>
-                        <li><a href="#">JavaScript</a></li>
-                        <li><a href="#">Python</a></li>
-                        <li><a href="#">CSS</a></li>
-                        <li><a href="#">Laravel</a></li>
-                        <li><a href="#">Symfony</a></li>
-                        <li><a href="#">POO</a></li>
-                        <li><a href="#">Twig</a></li>
-                        <li><a href="#">Web</a></li>
-                        <li><a href="#">Mobile</a></li>
+                        <?php foreach ($allCategories as $allCategory): ?>
+                            <li><a href="#"><?= $allCategory->title ?></a></li>
+                        <?php endforeach; ?>
                     </ul>
                 </aside>
             </div>

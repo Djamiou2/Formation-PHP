@@ -19,6 +19,7 @@
                                 <input type="text" class="cc-form-control" id="category" name="category" placeholder="Saisissez une ou plusieurs catégories..." value="<?= get_post_data($_POST, 'category') ?>">
                                 <?= display_errors($errors, 'category') ?>
                             </div>
+
                             <input type="submit" name="add_category" value="Ajouter" class="cc-btn">
                         </form>
                     </div>

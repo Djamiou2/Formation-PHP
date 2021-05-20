@@ -1,12 +1,20 @@
+<?php
+
+
+    function display_banner_image($image) {
+        return "background: linear-gradient(to bottom, rgba(0, 0, 0, 0.75) 75%, rgba(255, 255, 255, 0.4)), url($image) center no-repeat;";
+    }
+?>
+
 <!-- Banner section -->
-<section class="banner single-banner" id="banner">
+<section class="banner single-banner" id="banner" style="<?= display_banner_image($post->post_image) ?>">
     <div class="container">
         <div class="banner-wrapper">
-            <h1 class="b-title">Lorem ipsum dolor sit amet.</h1>
+            <h1 class="b-title"><?= $post->title ?></h1>
             <div class="page-path">
                 <a href="index.php">Accueil<i class="fas fa-caret-right"></i></a>
-                <a href="blog.html">Blog<i class="fas fa-caret-right"></i></a>
-                <a href="single.php">Article du blog</a>
+                <a href="blog.php">Blog<i class="fas fa-caret-right"></i></a>
+                <a href="single.php?id=<?= $_GET['id'] ?>">Article du blog</a>
             </div>
         </div>
     </div>
@@ -20,29 +28,25 @@
                 <div class="single-post row px-15"><!-- single post details -->
                     <div class="blog-info px-15">
                         <div class="post-tag">
-                            <a href="#" class="active">Lorem.</a>
-                            <a href="#">Lorem.</a>
-                            <a href="#">Lorem.</a>
-                            <a href="#">Lorem.</a>
+                            <?php foreach ($categories as $category): ?>
+                                <a href="#" class="mb-1"><?= $category->title ?></a>
+                            <?php endforeach; ?>
                         </div>
                         <ul class="blog-meta">
-                            <li class="author"><a href="#">Coding City<i class="fas fa-user"></i></a></li>
-                            <li class="date"><a href="#">17 Fev. 2021<i class="fas fa-calendar-alt"></i></a></li>
+                            <li class="author"><a href="#"><?= concatenate($post->name, $post->firstname) ?><i class="fas fa-user"></i></a></li>
+                            <li class="date"><a href="#"><?= time_format($post->created_at) ?><i class="fas fa-calendar-alt"></i></a></li>
                             <li class="consulted"><a href="#">Consulté 2M de fois<i class="fas fa-eye"></i></a></li>
                             <li class="comments"><a href="#">5069 Commentaires<i class="fas fa-comment"></i></a></li>
                         </ul>
                     </div>
 
                     <div class="post-img px-15 mb-1">
-                        <img src="assets/imgs/blog/main-blog/mainBlog-2.jpg" alt="" class="img">
+                        <img src="<?= $post->post_image ?>" alt="<?= $post->title ?>" class="img">
                     </div>
 
                     <div class="blog-details px-15 mb-1">
-                        <h2 class="post-title">Lorem ipsum dolor sit amet.</h2>
-                        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Corporis culpa eos in minus modi nulla quae quis repudiandae velit? Accusamus cumque iure modi nam odit perferendis quae quibusdam tenetur unde!</p>
-                        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aliquid aperiam dolorem molestias neque, nesciunt nihil nobis optio quae repudiandae similique suscipit temporibus ut voluptatum. Ea impedit in nobis sed temporibus!</p>
-                        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Corporis culpa eos in minus modi nulla quae quis repudiandae velit? Accusamus cumque iure modi nam odit perferendis quae quibusdam tenetur unde!</p>
-                        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Assumenda, eum sequi. Consectetur culpa, cum cupiditate ea eius est facilis id incidunt iste minus nulla odit qui quisquam repellat totam unde.</p>
+                        <h2 class="post-title"><?= $post->title ?></h2>
+                        <p><?= nl2br($post->content) ?></p>
                     </div>
 
                     <div class="notice px-15 my-1">
@@ -178,15 +182,15 @@
                 </aside>
 
                 <aside class="single-sidebar-widget author-widget t-center fw-300">
-                    <img src="assets/imgs/mentors/m4.jpg" alt="" class="author-img img-rounded">
-                    <h4>Coding city</h4>
-                    <p>Bloggueur Pro</p>
+                    <img src="<?= $post->user_image ?>" alt="" class="author-img img-rounded">
+                    <h4><?= concatenate($post->firstname, $post->name) ?></h4>
+                    <p><?= $post->role ?></p>
                     <div class="social-icon">
                         <a href="#"><i class="fab fa-facebook"></i></a>
                         <a href="#"><i class="fab fa-twitter"></i></a>
                         <a href="#"><i class="fab fa-github"></i></a>
                     </div>
-                    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Asperiores beatae delectus distinctio dolor dolore dolores doloribus excepturi explicabo hic, incidunt laboriosam magni odit optio, quo sed sit soluta ullam vel?</p>
+                    <p><?= nl2br($post->other) ?></p>
                     <div class="br"></div>
                 </aside>
 

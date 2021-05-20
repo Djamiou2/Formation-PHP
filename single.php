@@ -1,8 +1,15 @@
 <?php
-$title = 'Article 10';
 require_once 'includes/db.php';
 require_once 'includes/session_functions.php';
 require_once 'includes/functions.php';
+
+
+if (!isset($_GET['id'])) redirect_to('blog.php');
+$id = (int)$_GET['id'];
+$post = get_single_join_post($id);
+$categories = get_categories_for_articles($post->id);
+
+$title = $post->title;
 require_once 'partials/_header.php'
 
 ?>

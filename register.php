@@ -1,8 +1,8 @@
 <?php
-$title = 'Ajouter un administrateur';
-require_once 'includes/db.php';
 require_once 'includes/session_functions.php';
+require_once 'includes/db.php';
 require_once 'includes/functions.php';
+$title = 'Ajouter un administrateur';
 require_once 'partials/_header.php';
 
 if (!super()) redirect_to('login.php');
@@ -56,14 +56,19 @@ if (isset($_POST['add_user'])) {
     if (empty($errors)) {
         $password = password_hash('1234567890', PASSWORD_ARGON2I);
        //1) Enregistrer l'utilisateur en base de données
+        $db->beginTransaction();
         $q = $db->prepare("INSERT INTO user (name, firstname, email, password, role) VALUES (:name, :firstname, :email, :password, :role)");
-        $status = $q->execute([
+        $q->execute([
            'name' => $name,
            'firstname' => $firstname,
            'email' => $email,
            'password' => $password,
            'role' => $role
         ]);
+        $user_id = $db->lastInsertId();
+        $q = $db->query("INSERT INTO user_add (user_id) VALUES ($user_id)");
+
+        $status = $db->commit();
 
         if ($status) {
             //2) Envoyer un mail de confirmation

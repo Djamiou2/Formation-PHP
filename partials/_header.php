@@ -1,8 +1,10 @@
 <?php
+define('USER_FULL_NAME', ds_info('name') .' '. ds_info('firstname'));
+
 //Affiche les liens en blanc ou en gris en fonction de la page sur laquelle on se trouve
 function lightHeader() {
     if (stripos($_SERVER['REQUEST_URI'], '/index') === 0
-        || $_SERVER['REQUEST_URI'] === '/single.php'
+        || stripos($_SERVER['REQUEST_URI'], '/single') === 0
         || $_SERVER['REQUEST_URI'] === '/contact.php') {
 
         return '';
@@ -93,7 +95,7 @@ function set_active(string $path = null) {
 
                                 <a href="#" class="nav-link d-flex align-items-center <?= set_active() ?>" >
                                     <strong><?= ds_info('firstname') . ' ' . ds_info('name') ?></strong>
-                                    <img src="<?= ds_info('image') ?>" alt="" width="32" height="32" class="rounded-circle ms-2">
+                                    <img src="<?= ds_info('image') ?? 'assets/imgs/cc_default.png' ?>" alt="" width="32" height="32" class="rounded-circle ms-2">
                                 </a>
 
                                 <ul class="dropdown-menu"><!-- Dropdown menu -->

@@ -6,9 +6,8 @@
   border-top: .5rem solid #ffa400;
 
     &.single-banner {
-        background: linear-gradient(to bottom, rgba(#000, .75) 75%, rgba(#fff, .4)), url("../imgs/blog/main-blog/mainBlog-2.jpg") center no-repeat;
-        -webkit-background-size: cover;
-        background-size: cover;
+        -webkit-background-size: cover !important;
+        background-size: cover !important;
         height: 200px;
 
         .b-title {
