@@ -1,7 +1,4 @@
 <?php
-require_once 'includes/session_functions.php';
-require_once 'includes/db.php';
-require_once 'includes/functions.php';
 $title = "Ajouter un article";
 require_once 'partials/_header.php';
 

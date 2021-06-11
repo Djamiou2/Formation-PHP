@@ -50,8 +50,8 @@
                                     <td><?= time_format($category->created_at) ?></td>
                                     <td><?= $fullName ?></td>
                                     <td>
-                                        <a href="edit_category.php?id=<?= $category->id ?>" class="btn btn-sm btn-primary rounded-0"><i class="fas fa-edit"></i></a>
-                                        <a href="delete_category.php?id=<?= $category->id ?>" onclick="return(confirm('Confirmer la suppression de cet élément'))" class="btn btn-sm btn-danger rounded-0"><i class="fas fa-trash-alt"></i>
+                                        <a href="category_edit.php?id=<?= $category->id ?>" class="btn btn-sm btn-primary rounded-0"><i class="fas fa-edit"></i></a>
+                                        <a href="category_delete.php?id=<?= $category->id ?>" onclick="return(confirm('Confirmer la suppression de cet élément'))" class="btn btn-sm btn-danger rounded-0"><i class="fas fa-trash-alt"></i>
                                         </a>
                                         <button type="button" class="btn btn-sm btn-dark rounded-0" data-bs-toggle="modal" data-bs-target="#<?= str_replace(' ', '', $category->title.$category->id) ?>"><i class="fas fa-info-circle"></i></button>
                                     </td>

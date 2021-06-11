@@ -3,7 +3,7 @@
 <?= display_header('Liste des Articles', 'clipboard-list') ?>
 
 <section class="py-5">
-    <div class="container">
+    <div class="container-fluid">
         <?= display_session_alert(); ?>
         <?= display_session_alert('warning'); ?>
         <?= display_session_alert('info'); ?>
@@ -38,6 +38,7 @@
                                 <th scope="col">Titre et image</th>
                                 <th scope="col">Contenu</th>
                                 <th scope="col">Catégories</th>
+                                <th scope="col">Commentaires</th>
                                 <th scope="col">Date Création </th>
                                 <th scope="col">Auteur</th>
                                 <th scope="col">Actions</th>
@@ -49,6 +50,7 @@
                                 <?php
                                     $fullName = $post->name .' '. $post->firstname;
                                     $categories = get_categories_for_articles($post->id);
+                                    $comments = get_comments_for_article($post->id);
                                 ?>
                                 <tr>
                                     <td scope="row"><?= $post->id ?></td scope="row">
@@ -65,11 +67,12 @@
                                             echo $category->title .', ';
                                         } ?>
                                     </td>
+                                    <td><span class="badge bg-primary"><?= number_display($comments) ?></span> </td>
                                     <td><?= time_format($post->created_at) ?></td>
                                     <td><?= $fullName ?></td>
                                     <td>
-                                        <a href="edit_category.php?id=<?= $post->id ?>" class="btn btn-sm btn-primary rounded-0"><i class="fas fa-edit"></i></a>
-                                        <a href="delete_category.php?id=<?= $post->id ?>" onclick="return(confirm('Confirmer la suppression de cet élément'))" class="btn btn-sm btn-danger rounded-0"><i class="fas fa-trash-alt"></i>
+                                        <a href="post_edit.php?id=<?= $post->id ?>" class="btn btn-sm btn-primary rounded-0"><i class="fas fa-edit"></i></a>
+                                        <a href="post_delete.php?id=<?= $post->id ?>" onclick="return(confirm('Confirmer la suppression de cet élément'))" class="btn btn-sm btn-danger rounded-0"><i class="fas fa-trash-alt"></i>
                                         </a>
                                         <button type="button" class="btn btn-sm btn-dark rounded-0" data-bs-toggle="modal" data-bs-target="#<?= str_replace(' ', '', $post->title.$post->id) ?>"><i class="fas fa-info-circle"></i></button>
                                     </td>

@@ -16,7 +16,7 @@
                         <form action="" method="post">
                             <div class="cc-form-group">
                                 <label for="category" class="form-label">Catégorie : </label>
-                                <input type="text" class="cc-form-control" id="category" name="category" value="<?= isset($_POST['category']) ? get_post_data($_POST, 'category') : $currentCategory->title ?>">
+                                <input type="text" class="cc-form-control" id="category" name="category" value="<?=get_post_data($_POST, 'category', $currentCategory->title)?>">
                                 <?= display_errors($errors, 'category') ?>
                             </div>
                             <input type="submit" name="edit_category" value="Mettre à jour" class="cc-btn">

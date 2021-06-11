@@ -1,10 +1,6 @@
 <?php
 require_once 'includes/session_functions.php';
-require_once 'includes/db.php';
-require_once 'includes/functions.php';
-
 $title = "{$_SESSION['name']} {$_SESSION['firstname']}";
-
 require_once 'partials/_header.php';
 
 if (!isset($_GET['id']) || (int)$_GET['id'] <= 0 || $_GET['id'] !== $_SESSION['id']) {

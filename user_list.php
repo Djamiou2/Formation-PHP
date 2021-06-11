@@ -1,16 +1,18 @@
 <?php
 $title = 'Liste des utilisateurs';
-require_once 'includes/db.php';
-require_once 'includes/session_functions.php';
-require_once 'includes/functions.php';
 require_once 'partials/_header.php';
 
 if (!logged_in()) redirect_to('login.php');
 
 $perPage = 10; //Nombre d'éléments à afficher par page
 
-$query = "SELECT * FROM user ";
-$queryCount = "SELECT COUNT(id) as count FROM user";
+$query = "SELECT name, firstname, email, password, created_at, role, active, ua.id, born_at, gender, adress, phone, image, other, user_id
+    FROM user u 
+        left join user_add ua 
+            on u.id = ua.user_id";
+$queryCount = "SELECT COUNT(u.id) as count FROM user u 
+        left join user_add ua 
+            on u.id = ua.user_id";
 $params = [];
 
 //Gestion des paramètre de la recherche
@@ -29,7 +31,6 @@ $query .= " LIMIT $perPage OFFSET $offset";
 $q = $db->prepare($query);
 $q->execute($params);
 $users = $q->fetchAll(PDO::FETCH_OBJ);
-
 $q = $db->prepare($queryCount);
 $q->execute($params);
 $totalUsers = (int)$q->fetch()['count']; //Nombre Total des éléments provenant de la bdd

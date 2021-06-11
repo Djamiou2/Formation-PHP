@@ -1,7 +1,4 @@
 <?php
-require_once 'includes/session_functions.php';
-require_once 'includes/db.php';
-require_once 'includes/functions.php';
 $title = 'Ajouter un administrateur';
 require_once 'partials/_header.php';
 
@@ -13,7 +10,6 @@ $roles = ['modo', 'admin', 'super'];
 
 if (isset($_POST['add_user'])) {
     $submit = array_pop($_POST);
-
 
     if (!not_empty($_POST)) {
         $errors['global'] = "Tous les champs sont obligatoire";

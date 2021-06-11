@@ -1,7 +1,4 @@
 <?php
-require_once 'includes/db.php';
-require_once 'includes/session_functions.php';
-require_once 'includes/functions.php';
 
 if (!super()) {
     $_SESSION['info'] = "Accès refusé";
@@ -13,6 +10,9 @@ if (!isset($_GET['id']) || (int)$_GET['id'] <= 0) {
 }
 $id = (int)$_GET['id'];
 $db->beginTransaction();
+//Suppression des infos additives
+$q = $db->prepare("DELETE FROM post WHERE user_id = :id");
+$q->execute(['id' => $id]);
 //Suppression des infos additives
 $q = $db->prepare("DELETE FROM user_add WHERE user_id = :id");
 $q->execute(['id' => $id]);

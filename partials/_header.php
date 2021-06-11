@@ -1,4 +1,8 @@
 <?php
+require_once 'includes/db.php';
+require_once 'includes/session_functions.php';
+require_once 'includes/functions.php';
+
 define('USER_FULL_NAME', ds_info('name') .' '. ds_info('firstname'));
 
 //Affiche les liens en blanc ou en gris en fonction de la page sur laquelle on se trouve
@@ -95,7 +99,7 @@ function set_active(string $path = null) {
 
                                 <a href="#" class="nav-link d-flex align-items-center <?= set_active() ?>" >
                                     <strong><?= ds_info('firstname') . ' ' . ds_info('name') ?></strong>
-                                    <img src="<?= ds_info('image') ?? 'assets/imgs/cc_default.png' ?>" alt="" width="32" height="32" class="rounded-circle ms-2">
+                                    <img src="<?= ds_info('image') ?? 'assets/imgs/cc_default.png' ?>" alt="" class="rounded-circle ms-2 img-mini">
                                 </a>
 
                                 <ul class="dropdown-menu"><!-- Dropdown menu -->

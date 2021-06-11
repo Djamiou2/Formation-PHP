@@ -1,7 +1,4 @@
 <?php
-require_once 'includes/db.php';
-require_once 'includes/session_functions.php';
-require_once 'includes/functions.php';
 require_once 'partials/_header.php';
 
 if (!super()) {
@@ -52,6 +49,6 @@ if (isset($_POST['edit_category'])) {
 ?>
 
 
-<?php require_once 'views/_edit_category.php' ?>
+<?php require_once 'views/_category_edit.php' ?>
 
 <?php require_once 'partials/_footer.php'?>

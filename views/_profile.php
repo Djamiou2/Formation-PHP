@@ -126,7 +126,7 @@ echo display_header('Bienvenue sur votre profil ' . $param, "user-cog"); ?>
                                                             class="fas fa-calendar-alt"></i></span>
                                                 <input type="text" class="form-control"
                                                        placeholder="Ex: 1998-10-31 ou 1998/10/31" name="born_at"
-                                                       value="<?= get_post_data($_POST, 'born_at', $userInfo->born_at ?? '') ?>">
+                                                       value="<?= get_post_data($_POST, 'born_at', $userInfo->born_at) ?>">
                                                 <?= display_errors($errors, 'born_at') ?>
                                             </div>
                                         </div>
@@ -154,7 +154,7 @@ echo display_header('Bienvenue sur votre profil ' . $param, "user-cog"); ?>
                                                             class="fas fa-user"></i></span>
                                                 <input type="text" class="form-control"
                                                        placeholder="Ex:. Avenue Kenedy - Carrefour Picart" name="adress"
-                                                       value="<?= get_post_data($_POST, 'adress', $userInfo->adress ?? '') ?>">
+                                                       value="<?= get_post_data($_POST, 'adress', $userInfo->adress) ?>">
                                                 <?= display_errors($errors, 'adress') ?>
                                             </div>
                                         </div>
@@ -164,7 +164,7 @@ echo display_header('Bienvenue sur votre profil ' . $param, "user-cog"); ?>
                                                 <span class="input-group-text" id="basic-addon1"><i
                                                             class="fas fa-at"></i></span>
                                                 <input type="text" class="form-control" placeholder="Entrez votre email"
-                                                       name="email" value="<?= get_post_data($_POST, 'email', $userInfo->email ?? '') ?>">
+                                                       name="email" value="<?= get_post_data($_POST, 'email', $userInfo->email) ?>">
                                                 <?= display_errors($errors, 'email') ?>
                                             </div>
                                         </div>
@@ -175,7 +175,7 @@ echo display_header('Bienvenue sur votre profil ' . $param, "user-cog"); ?>
                                                             class="fas fa-phone-alt"></i></span>
                                                 <input type="text" class="form-control" placeholder="Ex: +224004695278"
                                                        name="phone"
-                                                       value="<?= get_post_data($_POST, 'phone', $userInfo->phone ?? '') ?>">
+                                                       value="<?= get_post_data($_POST, 'phone', $userInfo->phone) ?>">
                                                 <?= display_errors($errors, 'phone') ?>
                                             </div>
                                         </div>
@@ -194,7 +194,7 @@ echo display_header('Bienvenue sur votre profil ' . $param, "user-cog"); ?>
                                                 <span class="input-group-text"><i class="fas fa-info-circle"></i></span>
                                                 <textarea class="form-control" id="bio"
                                                           placeholder="Ex:. Parlez-nous de vous"
-                                                          name="bio"><?= get_post_data($_POST, 'bio', $userInfo->other ?? '') ?> </textarea>
+                                                          name="bio"><?= get_post_data($_POST, 'bio', $userInfo->other) ?> </textarea>
                                                 <?= display_errors($errors, 'bio') ?>
                                             </div>
                                         </div>

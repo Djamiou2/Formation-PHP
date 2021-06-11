@@ -36,7 +36,7 @@
                             <li class="author"><a href="#"><?= concatenate($post->name, $post->firstname) ?><i class="fas fa-user"></i></a></li>
                             <li class="date"><a href="#"><?= time_format($post->created_at) ?><i class="fas fa-calendar-alt"></i></a></li>
                             <li class="consulted"><a href="#">Consulté 2M de fois<i class="fas fa-eye"></i></a></li>
-                            <li class="comments"><a href="#">5069 Commentaires<i class="fas fa-comment"></i></a></li>
+                            <li class="comments"><a href="#"><?= $nbComments ?> <i class="fas fa-comment"></i></a></li>
                         </ul>
                     </div>
 
@@ -62,112 +62,9 @@
                     </div>
                 </div><!-- End single post details -->
 
-                <div class="navigation-area px-15 row"><!-- Navigation begin -->
-                    <div class="nav-left px-15"><!-- Article précedent -->
-                        <div class="thumb mr-1">
-                            <a href="#"><img src="assets/imgs/mentors/m1.jpg" alt="" class="img"></a>
-                        </div>
-                        <div class="arrow"><a href="#"><i class="fas fa-arrow-left"></i></a></div>
-                        <div class="details">
-                            <p><small>Lorem ipsum.</small></p>
-                            <a href="#">
-                                <h4>Lorem ipsum dolor.</h4>
-                            </a>
-                        </div>
-                    </div><!-- Fin Article précedent -->
-                    <div class="nav-right px-15"><!-- Article suivant -->
-                        <div class="thumb ml-1">
-                            <a href="#"><img src="assets/imgs/mentors/m2.jpg" alt="" class="img"></a>
-                        </div>
-                        <div class="arrow"><a href="#"><i class="fas fa-arrow-right"></i></a></div>
-                        <div class="details">
-                            <p><small>Lorem ipsum.</small></p>
-                            <a href="#">
-                                <h4>Lorem ipsum dolor.</h4>
-                            </a>
-                        </div>
-                    </div><!-- Fin Article suivant -->
-                </div><!-- End Navigation -->
-
-                <div class="comment-area px-15">
-                    <h4>03 Commentaires</h4>
-                    <div class="comment-row mb-1">
-                        <div class="single-comment row">
-                            <div class="thumb px-15">
-                                <img src="assets/imgs/mentors/m2.jpg" alt="" class="img">
-                            </div>
-                            <div class="desc px-15">
-                                <h5><a href="#">Coding City</a></h5>
-                                <div class="comment-options">
-                                    <p class="row">
-                                        <small class="date px-15">19 Dec 1978</small>
-                                        <small class="reply px-15">Répondre</small>
-                                    </p>
-                                    <p class="comment">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Animi atque consequuntur enim mollitia sit.</p>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="comment-row mb-1">
-                        <div class="single-comment row">
-                            <div class="thumb px-15">
-                                <img src="assets/imgs/mentors/m4.jpg" alt="" class="img">
-                            </div>
-                            <div class="desc px-15">
-                                <h5><a href="#">Coding City</a></h5>
-                                <div class="comment-options">
-                                    <p class="row">
-                                        <small class="date px-15">19 Dec 1978</small>
-                                        <small class="reply px-15">Répondre</small>
-                                    </p>
-                                    <p class="comment">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Animi atque consequuntur enim mollitia sit.</p>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="comment-row mb-1">
-                        <div class="single-comment row">
-                            <div class="thumb px-15">
-                                <img src="assets/imgs/mentors/m5.jpg" alt="" class="img">
-                            </div>
-                            <div class="desc px-15">
-                                <h5><a href="#">Coding City</a></h5>
-                                <div class="comment-options">
-                                    <p class="row">
-                                        <small class="date px-15">19 Dec 1978</small>
-                                        <small class="reply px-15">Répondre</small>
-                                    </p>
-                                    <p class="comment">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Animi atque consequuntur enim mollitia sit.</p>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="comment-form px-15">
-                    <h4>Laissez un commentaire</h4>
-                    <form>
-                        <div class="cc-form-group cc-form-inline">
-                            <div class="cc-form-group">
-                                <input type="text" class="cc-form-control" placeholder="Votre nom">
-                            </div>
-                            <div class="cc-form-group">
-                                <input type="text" class="cc-form-control" placeholder="Votre prénom">
-                            </div>
-                        </div>
-
-                        <div class="cc-form-group">
-                            <input type="email" class="cc-form-control" placeholder="Votre email">
-                        </div>
-
-                        <div class="cc-form-group">
-                            <textarea cols="30" rows="10" class="cc-form-control" placeholder="Votre message"></textarea>
-                        </div>
-
-                        <button class="cc-btn cc-btn-outline">Commenter</button>
-                    </form>
-                </div>
-
+                <?php require_once 'singleViews/_navigation.php'?>
+                <?php require_once 'singleViews/_comments.php'?>
+                <?php require_once 'singleViews/_form.php'?>
             </div>
 
             <div class="blog-right-side px-15">

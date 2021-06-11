@@ -1,19 +1,11 @@
 <?php
-require_once 'includes/session_functions.php';
-require_once 'includes/db.php';
-require_once 'includes/functions.php';
-
 $title = 'Ajouter une catégorie.';
+require_once 'partials/_header.php';
 
 if (!super() && !admin()) {
     $_SESSION['info'] = 'Accès refusé.';
     redirect_to('category_list.php');
 }
-
-
-
-require_once 'partials/_header.php';
-
 
 $errors = [];
 

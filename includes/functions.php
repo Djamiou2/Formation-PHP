@@ -80,6 +80,7 @@ function build_http_query(array $param) {
 }
 
 function get_post_data(array $tableData, string $field, ?string $databaseValue = null) {
+    if ($databaseValue == null) return '';
     if (!isset($tableData[$field]) && !isset($databaseValue)) return '';
     if (isset($databaseValue) && !isset($tableData[$field])) return htmlentities($databaseValue);
 
@@ -168,6 +169,10 @@ function redirect_to(string $path) {
 
 function time_format(string $stringTime) {
     return strftime("%d %b %Y à %R", strtotime($stringTime));
+}
+
+function number_display($param) {
+    return count($param) > 9 ? count($param) : '0'.count($param);
 }
 
 function concatenate($param1, $param2) {

@@ -40,9 +40,13 @@
                             <tr>
                                 <td scope="row"><?= $user->id ?></td scope="row">
                                 <td>
-                                    <div class="fw-bold"><?= $user->name ?> <?= $user->firstname ?></div>
-                                    <small class="text-muted fst-italic">--<?= $user->email ?>--</small>
-
+                                    <div class="row">
+                                        <div class="col-md-3 col-sm"><img src="<?= $user->image ?>" alt="" class="img-medium img-rounded"></div>
+                                        <div class="col-md-9 col-sm">
+                                            <div class="fw-bold"><?= $user->name ?> <?= $user->firstname ?></div>
+                                            <small class="text-muted fst-italic">--<?= $user->email ?>--</small>
+                                        </div>
+                                    </div>
                                 </td>
                                 <td><?= $user->role ?></td>
                                 <td><?= time_format($user->created_at) ?></td>
